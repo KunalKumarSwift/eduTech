@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import Sidebar from "@/components/Sidebar";
-import "@/app/globals.css";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Sidebar";
+import { ThemeProvider } from "@/components/theme-provider"; // Make sure this is imported
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Student Portal",
-  description: "Learning Management System",
+  description: "A modern student portal for managing academic life",
 };
 
 export default function RootLayout({
@@ -13,12 +17,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <div className="flex min-h-screen">
-          <Sidebar />
-          <main className="flex-1 ml-64 p-8">{children}</main>
-        </div>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen bg-background">
+            <Navbar />
+            <main className="pt-16 p-8 max-w-6xl mx-auto">{children}</main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

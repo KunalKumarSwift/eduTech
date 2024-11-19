@@ -74,7 +74,7 @@ const recentActivity = [
 
 export default function Dashboard() {
   return (
-    <div>
+    <div className="bg-[var(--background)]">
       <Header
         title="Welcome back, John!"
         subtitle="Here's what's happening with your courses."

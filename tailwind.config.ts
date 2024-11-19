@@ -6,12 +6,16 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class", // Add this line
+  darkMode: "class",
   theme: {
     extend: {
-      // Your theme extensions
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+      },
     },
   },
   plugins: [],
 };
+
 export default config;
