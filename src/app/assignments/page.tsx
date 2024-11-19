@@ -1,70 +1,126 @@
-//
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import {
+  BookOpenIcon,
+  ClipboardDocumentIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 import { Header } from "../components/common/Header";
-import { AssignmentCard } from "./components/AssignmentCard";
-import { SubmissionStats } from "./components/SubmissionStats";
+import { StatsCard } from "../components/common/StatsCard";
+import { ActivityList } from "./components/ActivityList";
 
-const assignments = [
+const stats = [
+  {
+    name: "Courses Enrolled",
+    value: "5",
+    icon: BookOpenIcon,
+    trend: "+1 this semester",
+    color: "text-blue-600",
+  },
+  {
+    name: "Assignments Due",
+    value: "3",
+    icon: ClipboardDocumentIcon,
+    trend: "2 due tomorrow",
+    color: "text-red-600",
+  },
+  {
+    name: "Average Grade",
+    value: "85%",
+    icon: ChartBarIcon,
+    trend: "+5% from last term",
+    color: "text-green-600",
+  },
+  {
+    name: "Attendance Rate",
+    value: "92%",
+    icon: UserGroupIcon,
+    trend: "Last 30 days",
+    color: "text-purple-600",
+  },
+];
+
+const recentActivity = [
   {
     id: 1,
-    title: "Final Project",
+    name: "Submitted assignment for Web Development",
+    date: "2 hours ago",
+    type: "submission",
     course: "Web Development",
-    dueDate: "2024-03-20T23:59:59",
-    status: "pending",
-    progress: 65,
-    priority: "high",
-    type: "project",
-    description: "Final project submission including documentation",
   },
-  // Add more assignments...
-];
-
-const submissionStats = [
   {
-    month: "Jan",
-    onTime: 12,
-    late: 2,
-    missed: 1,
+    id: 2,
+    name: "Attended Data Structures lecture",
+    date: "1 day ago",
+    type: "attendance",
+    course: "Data Structures",
   },
-  // Add more months...
+  {
+    id: 3,
+    name: "Received grade for Algorithms quiz",
+    date: "2 days ago",
+    type: "grade",
+    course: "Algorithms",
+  },
 ];
 
-export default function Assignments() {
-  const [filter, setFilter] = useState("all");
-
-  const headerAction = (
-    <div className="flex space-x-4">
-      <select
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        className="rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-      >
-        <option value="all">All Assignments</option>
-        <option value="pending">Pending</option>
-        <option value="completed">Completed</option>
-      </select>
-      <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-        New Assignment
-      </button>
-    </div>
-  );
-
+export default function Dashboard() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div>
       <Header
-        title="Assignments"
-        subtitle="Track and manage your assignments"
-        action={headerAction}
+        title="Welcome back, John!"
+        subtitle="Here's what's happening with your courses."
       />
 
-      <SubmissionStats data={submissionStats} />
-
-      <div className="mt-8 space-y-4">
-        {assignments.map((assignment) => (
-          <AssignmentCard key={assignment.id} assignment={assignment} />
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {stats.map((stat) => (
+          <StatsCard
+            key={stat.name}
+            title={stat.name}
+            value={stat.value}
+            trend={stat.trend}
+            icon={stat.icon}
+            color={stat.color}
+          />
         ))}
+      </div>
+
+      {/* Recent Activity */}
+      <div className="mt-6 md:mt-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-medium text-gray-900 dark:text-white">
+            Recent Activity
+          </h2>
+          <Link
+            href="/activity"
+            className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 flex items-center"
+          >
+            View all
+            <ChevronRightIcon className="ml-1 h-4 w-4" />
+          </Link>
+        </div>
+        <ActivityList activities={recentActivity} />
+      </div>
+
+      {/* Quick Actions */}
+      <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 md:p-6">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+            Upcoming Deadlines
+          </h3>
+          {/* Add upcoming deadlines content */}
+        </div>
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 md:p-6">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+            Course Progress
+          </h3>
+          {/* Add course progress content */}
+        </div>
       </div>
     </div>
   );

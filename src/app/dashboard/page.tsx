@@ -1,4 +1,3 @@
-//
 "use client";
 
 import { useState } from "react";
@@ -71,14 +70,14 @@ const recentActivity = [
 
 export default function Dashboard() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div>
       <Header
         title="Welcome back, John!"
         subtitle="Here's what's happening with your courses."
       />
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {stats.map((stat) => (
           <StatsCard
             key={stat.name}
@@ -92,7 +91,7 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Activity */}
-      <div className="mt-8">
+      <div className="mt-6 md:mt-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white">
             Recent Activity
@@ -109,14 +108,14 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
+      <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 md:p-6">
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
             Upcoming Deadlines
           </h3>
           {/* Add upcoming deadlines content */}
         </div>
-        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-6">
+        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-4 md:p-6">
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
             Course Progress
           </h3>
