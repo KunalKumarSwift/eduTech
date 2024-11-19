@@ -1,4 +1,3 @@
-import { IconType } from "react-icons";
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
 
 interface StatsCardProps {
@@ -6,7 +5,7 @@ interface StatsCardProps {
   value: string;
   trend: string;
   trendUp: boolean;
-  icon: IconType;
+  icon: React.ElementType; // Changed from IconType to React.ElementType
   color: string;
 }
 

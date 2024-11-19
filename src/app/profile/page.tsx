@@ -22,6 +22,15 @@ const tabs = [
   { name: "Security", icon: ShieldCheckIcon },
 ];
 
+// Add this sample data near the top of the file, after imports
+const samplePerformanceData = [
+  { x: "Mathematics", y: 95 },
+  { x: "Computer Science", y: 92 },
+  { x: "Physics", y: 88 },
+  { x: "English", y: 85 },
+  { x: "History", y: 90 },
+];
+
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("Personal Info");
   const [isEditing, setIsEditing] = useState(false);
@@ -33,15 +42,16 @@ export default function Profile() {
         subtitle="Manage your account settings and preferences"
       />
 
-      <ProfileHeader
-        name="John Doe"
-        course="Computer Science"
-        year="Year 2"
-        studentId="CS2023001"
-        gpa="3.8"
-        profilePicture="/profile-picture.jpg"
-        className="mb-6"
-      />
+      <div className="mb-6">
+        <ProfileHeader
+          name="John Doe"
+          course="Computer Science"
+          year="Year 2"
+          studentId="CS2023001"
+          gpa="3.8"
+          profilePicture="/profile-picture.jpg"
+        />
+      </div>
 
       {/* Scrollable tabs container on mobile */}
       <div className="overflow-x-auto -mx-4 px-4 md:overflow-visible md:px-0">
@@ -73,7 +83,7 @@ export default function Profile() {
 
         {activeTab === "Academic" && (
           <div className="p-4 md:p-6">
-            <AcademicPerformance />
+            <AcademicPerformance performanceData={samplePerformanceData} />
           </div>
         )}
 

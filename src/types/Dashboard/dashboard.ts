@@ -10,6 +10,6 @@ export interface Activity {
   id: number;
   name: string;
   date: string;
-  type: string;
+  type: "submission" | "attendance" | "grade"; // Update this to use literal types
   course: string;
 }

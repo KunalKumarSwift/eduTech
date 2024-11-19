@@ -1,7 +1,8 @@
 interface ReminderFiltersProps {
   filter: string;
-  onFilterChange: (value: string) => void;
-  onSearch: (value: string) => void;
+  searchTerm: string; // Add this line
+  onFilterChange: (filter: string) => void;
+  onSearch: (searchTerm: string) => void; // Add this line
 }
 
 export function ReminderFilters({

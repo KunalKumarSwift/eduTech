@@ -12,6 +12,7 @@ import {
 import { Header } from "../components/common/Header";
 import { StatsCard } from "../components/common/StatsCard";
 import { ActivityList } from "./components/ActivityList";
+import { Activity } from "@/types/Dashboard/dashboard";
 
 const stats = [
   {
@@ -19,6 +20,7 @@ const stats = [
     value: "5",
     icon: BookOpenIcon,
     trend: "+1 this semester",
+    trendUp: true,
     color: "text-blue-600",
   },
   {
@@ -26,6 +28,7 @@ const stats = [
     value: "3",
     icon: ClipboardDocumentIcon,
     trend: "2 due tomorrow",
+    trendUp: false, // Using false since more assignments due might not be positive
     color: "text-red-600",
   },
   {
@@ -33,6 +36,7 @@ const stats = [
     value: "85%",
     icon: ChartBarIcon,
     trend: "+5% from last term",
+    trendUp: true,
     color: "text-green-600",
   },
   {
@@ -40,11 +44,12 @@ const stats = [
     value: "92%",
     icon: UserGroupIcon,
     trend: "Last 30 days",
+    trendUp: true,
     color: "text-purple-600",
   },
 ];
 
-const recentActivity = [
+const recentActivity: Activity[] = [
   {
     id: 1,
     name: "Submitted assignment for Web Development",
@@ -84,6 +89,7 @@ export default function Dashboard() {
             title={stat.name}
             value={stat.value}
             trend={stat.trend}
+            trendUp={stat.trendUp}
             icon={stat.icon}
             color={stat.color}
           />

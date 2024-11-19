@@ -19,6 +19,7 @@ const stats = [
     value: "5",
     icon: BookOpenIcon,
     trend: "+1 this semester",
+    trendUp: true, // Add trendUp property
     color: "text-blue-600",
   },
   {
@@ -26,6 +27,7 @@ const stats = [
     value: "3",
     icon: ClipboardDocumentIcon,
     trend: "2 due tomorrow",
+    trendUp: false, // Add trendUp property
     color: "text-red-600",
   },
   {
@@ -33,6 +35,7 @@ const stats = [
     value: "85%",
     icon: ChartBarIcon,
     trend: "+5% from last term",
+    trendUp: true, // Add trendUp property
     color: "text-green-600",
   },
   {
@@ -40,6 +43,7 @@ const stats = [
     value: "92%",
     icon: UserGroupIcon,
     trend: "Last 30 days",
+    trendUp: true, // Add trendUp property
     color: "text-purple-600",
   },
 ];
@@ -84,6 +88,7 @@ export default function Dashboard() {
             title={stat.name}
             value={stat.value}
             trend={stat.trend}
+            trendUp={stat.trendUp} // Pass trendUp prop
             icon={stat.icon}
             color={stat.color}
           />

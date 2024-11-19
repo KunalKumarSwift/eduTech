@@ -7,6 +7,7 @@ interface ProfileHeaderProps {
   studentId: string;
   gpa: string;
   profilePicture: string;
+  className?: string; // Add this line
 }
 
 export function ProfileHeader({
