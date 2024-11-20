@@ -7,12 +7,14 @@ import {
   CogIcon,
   BellIcon,
   ShieldCheckIcon,
+  PhotoIcon,
 } from "@heroicons/react/24/outline";
 import { Header } from "../components/common/Header";
 import { TabGroup } from "../components/common/TabGroup";
 import { ProfileHeader } from "./components/ProfileHeader";
 import { PersonalInfoForm } from "./components/PersonalInfoForm";
 import { AcademicPerformance } from "./components/AcademicPerformance";
+import Image from "next/image";
 
 const tabs = [
   { name: "Personal Info", icon: UserCircleIcon },
@@ -22,7 +24,8 @@ const tabs = [
   { name: "Security", icon: ShieldCheckIcon },
 ];
 
-// Add this sample data near the top of the file, after imports
+const PROFILE_IMAGE_URL = "/avatar.png"; // Make sure to add an avatar.png in your public folder
+
 const samplePerformanceData = [
   { x: "Mathematics", y: 95 },
   { x: "Computer Science", y: 92 },
@@ -35,59 +38,95 @@ export default function Profile() {
   const [activeTab, setActiveTab] = useState("Personal Info");
   const [isEditing, setIsEditing] = useState(false);
 
+  const headerAction = (
+    <div className="flex items-center space-x-2">
+      <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+        <Image
+          src={PROFILE_IMAGE_URL}
+          alt="Profile"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+        />
+      </div>
+    </div>
+  );
+
   return (
-    <div>
+    <div className="space-y-6">
       <Header
         title="Profile Settings"
         subtitle="Manage your account settings and preferences"
+        action={headerAction}
       />
 
-      <div className="mb-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 md:p-6">
         <ProfileHeader
           name="John Doe"
           course="Computer Science"
           year="Year 2"
           studentId="CS2023001"
           gpa="3.8"
-          profilePicture="/profile-picture.jpg"
+          profilePicture={PROFILE_IMAGE_URL}
         />
       </div>
 
-      {/* Scrollable tabs container on mobile */}
-      <div className="overflow-x-auto -mx-4 px-4 md:overflow-visible md:px-0">
-        <div className="inline-flex md:flex w-max md:w-full space-x-2 mb-6">
-          {tabs.map((tab) => (
-            <button
-              key={tab.name}
-              onClick={() => setActiveTab(tab.name)}
-              className={`flex items-center px-4 py-2 rounded-lg whitespace-nowrap ${
-                activeTab === tab.name
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-              }`}
-            >
-              <tab.icon className="h-5 w-5 mr-2" />
-              {tab.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
+      {/* Tabs Navigation */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-        {activeTab === "Personal Info" && (
-          <PersonalInfoForm
-            isEditing={isEditing}
-            onEditToggle={() => setIsEditing(!isEditing)}
-          />
-        )}
-
-        {activeTab === "Academic" && (
+        <div className="border-b border-gray-200 dark:border-gray-700">
           <div className="p-4 md:p-6">
-            <AcademicPerformance performanceData={samplePerformanceData} />
+            <nav className="flex space-x-4 overflow-x-auto">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.name}
+                  onClick={() => setActiveTab(tab.name)}
+                  className={`flex items-center px-4 py-2 rounded-lg whitespace-nowrap transition-colors
+                    ${
+                      activeTab === tab.name
+                        ? "bg-indigo-600 text-white"
+                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    }`}
+                >
+                  <tab.icon className="h-5 w-5 mr-2" />
+                  {tab.name}
+                </button>
+              ))}
+            </nav>
           </div>
-        )}
+        </div>
 
-        {/* Add other tab content components */}
+        {/* Tab Content */}
+        <div className="p-4 md:p-6">
+          {activeTab === "Personal Info" && (
+            <PersonalInfoForm
+              isEditing={isEditing}
+              onEditToggle={() => setIsEditing(!isEditing)}
+            />
+          )}
+
+          {activeTab === "Academic" && (
+            <AcademicPerformance performanceData={samplePerformanceData} />
+          )}
+
+          {activeTab === "Settings" && (
+            <div className="text-gray-600 dark:text-gray-400">
+              Settings content coming soon...
+            </div>
+          )}
+
+          {activeTab === "Notifications" && (
+            <div className="text-gray-600 dark:text-gray-400">
+              Notifications preferences coming soon...
+            </div>
+          )}
+
+          {activeTab === "Security" && (
+            <div className="text-gray-600 dark:text-gray-400">
+              Security settings coming soon...
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
