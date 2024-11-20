@@ -27,7 +27,9 @@ export default function RootLayout({
         >
           <div className="min-h-screen bg-background">
             <Navbar />
-            <main className="pt-16 p-8 max-w-6xl mx-auto">{children}</main>
+            <main className="pt-16 p-8 max-w-6xl mx-auto shadow-md">
+              {children}
+            </main>
           </div>
         </ThemeProvider>
       </body>

@@ -24,7 +24,7 @@ const tabs = [
   { name: "Security", icon: ShieldCheckIcon },
 ];
 
-const PROFILE_IMAGE_URL = "/avatar.png"; // Make sure to add an avatar.png in your public folder
+const PROFILE_IMAGE_URL = "/avatar.svg"; // Make sure to add an avatar.png in your public folder
 
 const samplePerformanceData = [
   { x: "Mathematics", y: 95 },
@@ -61,7 +61,7 @@ export default function Profile() {
         action={headerAction}
       />
 
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 md:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6">
         <ProfileHeader
           name="John Doe"
           course="Computer Science"
